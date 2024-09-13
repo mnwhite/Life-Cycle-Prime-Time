@@ -55,6 +55,8 @@ The remarkable advance of computational power has now finally made it possible t
 
 %% MNW: I can't overstate the extent to which I disagree with the above paragraph. Solving a lifecycle micro model with some combination of those features is *nowhere near* the level of complexity and computational burden as flying a spacecraft. I am sure of this because *I program those models on my own*, and get them done in quite finite time. NASA employs *large teams* of programmers to launch spacecraft, as do companies who develop automated driving systems. This comparison makes you sound non-credible.
 
+%% AS: Matt, I disagree with you to a similar unoverstatable extent. But we should chat about this as I want your thoughts on what I could be potentially missing. E.g.: We have used about 15 Million Compute hours + a fairly advanced distributed computing architecture + me becoming the "suffering child from Omelas" to estimate a lifecycle model with i) housing/ renting decisions ii)  basic pension portfolio contribution and  choice architecure iv) mortgage debt and v) basic preference heterogeniey. I am confident I have squeezed as much as I can out of EGM and other code optimization. Curse of dimensionality is real. I am pretty sure the math we used to compute the various permutations of OBCs is more advanced than what NASA uses to send space-craft using Newton. And the features of our model is "basic" compared to what the industry/fund actually would have liked to see. 
+
 ### Survey Data on Expectations and Preferences
 
 Another academic development has been a new openness to the idea that people's beliefs and preferences can be probed by *asking them* about their beliefs and preferences.
@@ -171,7 +173,7 @@ Potential future utility flows matter only to the extent that the agent expects 
 In formal mathematical terms, the consumer's objective is to maximize expected present discounted utility from consumption over a life cycle that ends no later than date $T$:
 
 \begin{equation}
-    \pmb{\vFunc}_{t}(\mLvl_{t},\pLvl_{t}) = \max_{\{\cFunc\}_{t}^{T}} ~ \uFunc(\cLvl_{t})+\Ex_{t}\left[\sum_{n=1}^{T-t} \Alive_{t}^{t+n}{\DiscFac}^{n} \uFunc(\cLvl_{t+n}) \right] \label{eq:lifecyclemax}
+    \pmb{\vFunc}_{t}(\mLvl_{t},\pLvl_{t}) = \max_{\{\cLvL_{t}\}_{t}^{T}} ~ \uFunc(\cLvl_{t})+\Ex_{t}\left[\sum_{n=1}^{T-t} \Alive_{t}^{t+n}{\DiscFac}^{n} \uFunc(\cLvl_{t+n}) \right] \label{eq:lifecyclemax}
 \end{equation}
 
 \begin{align}
@@ -200,7 +202,7 @@ The transitory component $\tranShk$ of income has two modes.
 In unemployment spells, the consumer earns no income; we assume that such spells occur with probability $\pZero$ each period.
 Otherwise, the consumer receives a transitory income shock $\xi > 0$ from some (mean one) distribution, rescaled to preserve the unit mean of $\tranShk$:[^betterunemp]
 \begin{align}
-    \tranShkEmp_{s} = &
+    \tranShkEmp_{t} = &
     \begin{cases}
         0\phantom{/\pZero} & \text{with probability $\pZero>0$}
         \\ \xi_{s}/(1-\pZero) & \text{with probability $(1-\pZero)$}
@@ -213,8 +215,8 @@ Otherwise, the consumer receives a transitory income shock $\xi > 0$ from some (
 
 It is conventional to assume that shocks to permanent income and to the transitory income of the employed are (mean one) lognormally distributed:
 \begin{align}
-    \log \permShk_{s} \thicksim \mathcal{N}(-\sigma_{[\permShk, t]}^{2}/2,\sigma_{[\permShk, t]}^{2})
-    \\ \log \xi_{s}\thicksim \mathcal{N}(-\sigma_{[\xi, t]}^{2}/2,\sigma_{[\xi, t]}^{2})
+    \log \permShk_{t} \thicksim \mathcal{N}(-\sigma_{[\permShk, t]}^{2}/2,\sigma_{[\permShk, t]}^{2})
+    \\ \log \xi_{t}\thicksim \mathcal{N}(-\sigma_{[\xi, t]}^{2}/2,\sigma_{[\xi, t]}^{2})
 \end{align}
 
 %% which, together with the other assumptions, guarantee that the expected value of the transitory and of the permanent shocks are both 1: $\Ex_{t}[\permShk_{t+1}]=\Ex_{t}[\tranShk_{t+1}]=1$.
@@ -224,6 +226,8 @@ Under the assumptions we have made about the structure of the utility function (
 So, for example, italic $\cNrm = \cLvl/\pLvl$ is the ratio of the (boldface) level of consumption to the level of permanent income $\pLvl$ (see @BufferStockTheory for the math).
 
 ## MNW: Critical issue! You *have not stated* the budget constraint, nor how asset returns work. First sentence of paragraph above does not have foundation.
+
+%% AS: \thicksim does not render in the pdf?
 
 Another way to make the problem easier to understand is to combine several of the multiplicative terms into portmanteau variables.
 Defining boldface $\pmb{\DiscFac}_{t+1}$ as
@@ -247,6 +251,8 @@ We can represent the value of ending the period with assets of $\aNrm$ using the
 
 %% MNW: Note that you *still* have not told the reader about any risk free asset. You're about to "add portfolio choice", but there's no basic version.
 
+%% AS: \mNrm_{t+1} really (really!) needs to be defined somewhere explicitly for this all to make sense. 
+
 We are now ready to add portfolio choice to the problem.
 Suppose the consumer can invest in a risky asset that earns rate of return $\log \Risky \thicksim \mathcal{N}(\rfree + \eprem - \sigma^{2}/2, \sigma^{2})$.
 That is, we make the conventional assumption that returns are lognormally distributed with an expected equity premium of $\eprem$.
@@ -267,11 +273,13 @@ and the consumer is assumed to make the optimal choice of portfolio share:
 
 %% MNW: Now this is getting confusing, because you already defined gothic-v as a function of a above, and now you're changing the definition.
 
+%% AS: The above may make sense(?unsure), but budget constraint and state transition needs to be written out explicitly somewhere. 
+
 The consumer's objective in the consumption stage of the problem can be expressed in Bellman form as:
 \begin{align}
     {\vFunc}_{t}({\mNrm}_{t}) & = \max_{\cNrm_{t}} ~ \uFunc(\cNrm_{t})+\Alive_{t+1} \mathfrak{v}_{t}(\aNrm_{t})
     \\ & \text{s.t.} &
-    \\ \aNrm_{t} & = {\mNrm}_{t}-\cNrm_{t}
+    \\ \aNrm_{t} & = {\mNrm}_{t}-\cNrm_{t}, \quad  \,\, \mNrm_{t}\geq \cNrm_{t}\geq 0
     % \\ {\mNrm}_{t+1} & = \aNrm_{t}\RNrm_{t+1} + ~\tranShkEmp_{t+1}
 \end{align}
 
@@ -366,6 +374,7 @@ The literature has commonly used a 'warm glow utility from bequests' motive of t
 \end{align}
 where the $\CRRA$ coefficient is the same as in the utility function for consumption (see, e.g., @deNardiBequest), and the $\alpha$ coefficient controls the importance of the bequest motive relative to the utility from consumption.
 
+%% AS: mention what underline{a} means? Min assets after which someone cares about the bequest. Bequest is a luxury good due to \underline{a}.
 
 ## Wealth in the Utility Function
 
