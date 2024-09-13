@@ -171,7 +171,7 @@ Potential future utility flows matter only to the extent that the agent expects 
 In formal mathematical terms, the consumer's objective is to maximize expected present discounted utility from consumption over a life cycle that ends no later than date $T$:
 
 \begin{equation}
-    \pmb{\vFunc}_{t}(\mLvl_{t},\pLvl_{t}) = \max_{\{\cFunc\}_{t}^{T}} ~ \uFunc(\cLvl_{t})+\Ex_{t}\left[\sum_{n=1}^{T-t} \Alive_{t}^{t+n}{\DiscFac}^{n} \uFunc(\cLvl_{t+n}) \right] \label{eq:lifecyclemax}
+    \pmb{\vFunc}_{t}(\mLvl_{t},\pLvl_{t}) = \max_{\{\cLvL_{t}\}_{t}^{T}} ~ \uFunc(\cLvl_{t})+\Ex_{t}\left[\sum_{n=1}^{T-t} \Alive_{t}^{t+n}{\DiscFac}^{n} \uFunc(\cLvl_{t+n}) \right] \label{eq:lifecyclemax}
 \end{equation}
 
 \begin{align}
@@ -200,7 +200,7 @@ The transitory component $\tranShk$ of income has two modes.
 In unemployment spells, the consumer earns no income; we assume that such spells occur with probability $\pZero$ each period.
 Otherwise, the consumer receives a transitory income shock $\xi > 0$ from some (mean one) distribution, rescaled to preserve the unit mean of $\tranShk$:[^betterunemp]
 \begin{align}
-    \tranShkEmp_{s} = &
+    \tranShkEmp_{t} = &
     \begin{cases}
         0\phantom{/\pZero} & \text{with probability $\pZero>0$}
         \\ \xi_{s}/(1-\pZero) & \text{with probability $(1-\pZero)$}
@@ -213,8 +213,8 @@ Otherwise, the consumer receives a transitory income shock $\xi > 0$ from some (
 
 It is conventional to assume that shocks to permanent income and to the transitory income of the employed are (mean one) lognormally distributed:
 \begin{align}
-    \log \permShk_{s} \thicksim \mathcal{N}(-\sigma_{[\permShk, t]}^{2}/2,\sigma_{[\permShk, t]}^{2})
-    \\ \log \xi_{s}\thicksim \mathcal{N}(-\sigma_{[\xi, t]}^{2}/2,\sigma_{[\xi, t]}^{2})
+    \log \permShk_{t} \thicksim \mathcal{N}(-\sigma_{[\permShk, t]}^{2}/2,\sigma_{[\permShk, t]}^{2})
+    \\ \log \xi_{t}\thicksim \mathcal{N}(-\sigma_{[\xi, t]}^{2}/2,\sigma_{[\xi, t]}^{2})
 \end{align}
 
 %% which, together with the other assumptions, guarantee that the expected value of the transitory and of the permanent shocks are both 1: $\Ex_{t}[\permShk_{t+1}]=\Ex_{t}[\tranShk_{t+1}]=1$.
@@ -224,6 +224,8 @@ Under the assumptions we have made about the structure of the utility function (
 So, for example, italic $\cNrm = \cLvl/\pLvl$ is the ratio of the (boldface) level of consumption to the level of permanent income $\pLvl$ (see @BufferStockTheory for the math).
 
 ## MNW: Critical issue! You *have not stated* the budget constraint, nor how asset returns work. First sentence of paragraph above does not have foundation.
+
+%% AS: \thicksim does not render in the pdf?
 
 Another way to make the problem easier to understand is to combine several of the multiplicative terms into portmanteau variables.
 Defining boldface $\pmb{\DiscFac}_{t+1}$ as
@@ -271,7 +273,7 @@ The consumer's objective in the consumption stage of the problem can be expresse
 \begin{align}
     {\vFunc}_{t}({\mNrm}_{t}) & = \max_{\cNrm_{t}} ~ \uFunc(\cNrm_{t})+\Alive_{t+1} \mathfrak{v}_{t}(\aNrm_{t})
     \\ & \text{s.t.} &
-    \\ \aNrm_{t} & = {\mNrm}_{t}-\cNrm_{t}
+    \\ \aNrm_{t} & = {\mNrm}_{t}-\cNrm_{t}, \quad  \,\, \mNrm_{t}\geq \cNrm_{t}\geq 0
     % \\ {\mNrm}_{t+1} & = \aNrm_{t}\RNrm_{t+1} + ~\tranShkEmp_{t+1}
 \end{align}
 
@@ -366,6 +368,7 @@ The literature has commonly used a 'warm glow utility from bequests' motive of t
 \end{align}
 where the $\CRRA$ coefficient is the same as in the utility function for consumption (see, e.g., @deNardiBequest), and the $\alpha$ coefficient controls the importance of the bequest motive relative to the utility from consumption.
 
+%% AS: mention what underline{a} means? Min assets after which someone cares about the bequest. Bequest is a luxury good due to \underline{a}.
 
 ## Wealth in the Utility Function
 
