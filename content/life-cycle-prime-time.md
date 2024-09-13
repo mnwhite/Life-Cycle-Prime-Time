@@ -249,6 +249,8 @@ We can represent the value of ending the period with assets of $\aNrm$ using the
 
 %% MNW: Note that you *still* have not told the reader about any risk free asset. You're about to "add portfolio choice", but there's no basic version.
 
+%% AS: \mNrm_{t+1} really (really!) needs to be defined somewhere explicitly for this all to make sense. 
+
 We are now ready to add portfolio choice to the problem.
 Suppose the consumer can invest in a risky asset that earns rate of return $\log \Risky \thicksim \mathcal{N}(\rfree + \eprem - \sigma^{2}/2, \sigma^{2})$.
 That is, we make the conventional assumption that returns are lognormally distributed with an expected equity premium of $\eprem$.
@@ -268,6 +270,8 @@ and the consumer is assumed to make the optimal choice of portfolio share:
 \end{align}
 
 %% MNW: Now this is getting confusing, because you already defined gothic-v as a function of a above, and now you're changing the definition.
+
+%% AS: The above may make sense(?unsure), but budget constraint and state transition needs to be written out explicitly somewhere. 
 
 The consumer's objective in the consumption stage of the problem can be expressed in Bellman form as:
 \begin{align}
